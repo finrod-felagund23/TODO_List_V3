@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TODO List V3</string>
+    <string name="add_new_todo_btn">+</string>
+    <string name="havent_todo_txt">Now You Haven\'t Any TODO</string>
+    <string name="no_todo_txt">Now You Havent Any TODO</string>
+    <string name="add_TODO_btn">+</string>
+    <string name="title_activity_make_new_todo">MakeNewTODO_Activity</string>
+    <string name="hint_for_theme_edt">TODO</string>
+    <string name="hint_to_extra_desc">Enter extra description</string>
+    <string name="add_btn">ADD</string>
+    <string name="delete_btn">DELETE</string>
+
+</resources>
