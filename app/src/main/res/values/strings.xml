@@ -9,5 +9,6 @@
     <string name="hint_to_extra_desc">Enter extra description</string>
     <string name="add_btn">ADD</string>
     <string name="delete_btn">DELETE</string>
+    <string name="read_from_file_btn">Read From File</string>
 
 </resources>
