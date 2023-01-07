@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -40,14 +42,14 @@ import kotlin.jvm.internal.Lambda;
 public class MainActivity extends AppCompatActivity {
     private final String FILE_NAME = "content.json";
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private ObjectWriter objectWriter = null;
+    private final ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        objectMapper.configure(JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS, false);
-        objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
+//        objectMapper.configure(JsonGenerator.Feature.WRITE_NUMBERS_AS_STRINGS, false);
+//        objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
 
         File file = new File(getApplicationContext().getFilesDir(), FILE_NAME);
         if (!file.exists()) {
@@ -74,26 +76,50 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
+//        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        int screenWidth = displayMetrics.widthPixels;
+//        int screenHeight = displayMetrics.heightPixels;
 
-        screenWidth = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, displayMetrics.widthPixels, getResources().getDisplayMetrics()
-        );
-        screenHeight = (int) TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, displayMetrics.heightPixels, getResources().getDisplayMetrics()
-        );
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+//        int screenHeight = size.x;
+//        int screenWidth = size.y;
 
-        System.out.println(screenHeight);
-        System.out.println(screenWidth);
+
+//        screenWidth = (int) TypedValue.applyDimension(
+//                TypedValue.COMPLEX_UNIT_DIP, displayMetrics.widthPixels, getResources().getDisplayMetrics()
+//        );
+//        screenHeight = (int) TypedValue.applyDimension(
+//                TypedValue.COMPLEX_UNIT_DIP, displayMetrics.heightPixels, getResources().getDisplayMetrics()
+//        );
+
+        System.out.println((int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,  600, getResources().getDisplayMetrics()
+        ));
+        System.out.println((int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_PX, 600, getResources().getDisplayMetrics()
+        ));
+        System.out.println((int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_SP, 600, getResources().getDisplayMetrics()
+        ));
+
+//        System.out.println(screenHeight);
+//        System.out.println(screenWidth);
+        System.out.println(size.y);
+        System.out.println(size.x);
 
         ConstraintLayout constraintLayout = findViewById(R.id.main_constraint_layout);
 
         if (constraintLayout!= null) {
             System.out.println("Its not nu;l;l");
-            constraintLayout.setMinHeight(screenHeight);
-            constraintLayout.setMinWidth(screenWidth);
+//            constraintLayout.setMinHeight(screenHeight);
+////            constraintLayout.setMinWidth(screenWidth);
+//            constraintLayout.setMinWidth(size.x);
+//            System.out.println(size.x - 20);
+//            System.out.println(size.y - 20);
+            constraintLayout.setMinHeight(size.y - 160); // 1120 for SMJ5-2016
+
             System.out.println("91");
         } else {
             System.out.println("ConstraintLayout constraintLayout = findViewById(R.id.main_constraint_layout); IS NULL");
@@ -249,7 +275,6 @@ public class MainActivity extends AppCompatActivity {
             }
             System.out.println("196");
         } catch (IOException ex) {
-            System.out.println(ex);
             ex.printStackTrace();
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
 

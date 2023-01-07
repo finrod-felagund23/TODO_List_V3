@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/main_constraint_layout"
-    android:layout_width="410dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="600dp"
     android:background="@drawable/layout_border"
@@ -31,7 +31,7 @@
         android:id="@+id/add_btn"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_margin="30dp"
+        android:layout_margin="40dp"
         android:background="@drawable/oval_button"
         android:textSize="27sp"
         android:text="@string/add_new_todo_btn"
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
-        android:text="Read From File"
+        android:text="@string/read_from_file_btn"
         android:onClick="onClickReadFromFile"
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintBottom_toBottomOf="parent"
